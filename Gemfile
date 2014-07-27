@@ -40,6 +40,14 @@ gem 'bcrypt-ruby', '3.1.2'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+
+
+group :test do
+
+  gem 'factory_girl_rails', '4.2.0'
+end
+
+
 end
 
 # Use ActiveModel has_secure_password
