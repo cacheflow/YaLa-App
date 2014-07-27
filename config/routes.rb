@@ -1,5 +1,12 @@
 Yala::Application.routes.draw do
-get "chats/room"
+  resources :users
+  root  'static_pages#home'
+  match '/signup',  to: 'users#new', via: 'get'
+  get "static_pages/home"
+  get "static_pages/help"
+  get "static_pages/about"
+  get "users/new"
+  get "chats/room"
   get "sessions/new"
   get "sessions/create"
   get  '/chatroom' => 'chats#room', :as => :chat

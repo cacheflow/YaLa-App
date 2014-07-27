@@ -31,6 +31,8 @@ gem 'faye'
 
 gem 'thin', '~> 1.6.2'
 
+gem 'factory_girl_rails', '4.2.0'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
