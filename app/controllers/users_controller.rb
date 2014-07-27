@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user, only: [:index, :edit, :update, :destroy]
 
   def index
-    @users = User.all.sort_by { |u| u[:firstName] }
+    @users = User.all.sort_by { |u| u[:email] }
   end
 
   def show
@@ -18,15 +18,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def create
-    @user = User.new(user_params)
-    session[:remember_token] = @user.id.to_s
-    if @user.save
-      flash[:success] = "You have signed up successfully"
-      redirect_to :root
-    else
-      render :new
-    end
+ 
+	def create 
+		@user = User.new(params.require(:user).permit(:email, :password))
+		if @user.save
+				redirect_to root_path
+		else 
+			render action: "index"
+		end 
   end
 
   def update
@@ -47,6 +46,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:firstName, :lastName, :email, :about, :password, :password_confirmation, :picture)
+      params.require(:user).permit(:email, :password, :password_confirmation)
     end
 end

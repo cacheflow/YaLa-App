@@ -12,7 +12,7 @@
 
 				<strong>Tags:</strong>
 			  <%= p.tags %><br>
-			  Posted by <%= link_to p.user.firstName + " " + p.user.lastName, p.user %>
+			  Posted by <%= link_to p.user.email  %>
 			  <%= distance_of_time_in_words_to_now(p.created_at) + " ago" %>	
 			</div>
 	  </div>
@@ -23,10 +23,10 @@
 			  
 			  <!-- photo-description -->
 			  <div class="first-comment-box">
-					<div class="first-comment"><strong><%= '"' + p.caption + '"'%></strong>
+					<div class="first-comment"><strong><%= '"' + p.comment + '"'%></strong>
 					</div>
 			  	<div class="user-icon">
-			  		<%= p.user.firstName + " " + p.user.lastName.first %> <%= link_to image_tag(p.user.picture.url(:small), class: "img-circle img-profile", width: 40 ), p.user %>
+			  		<%= p.user.email %> <%= link_to class: "img-circle img-profile", width: 40 ), p.user %>
 		  		</div>
 			  	
 		
@@ -36,7 +36,7 @@
 			  <% p.comments.each do |c| %>
 			  	<div class="comment">
 				  	<%= c.content %> 
-				  	<%= c.user.firstName + " " + c.user.lastName.first %> <%= link_to image_tag(c.user.picture.url(:small), class: "img-circle img-profile", width: 40 ), c.user %>
+				  	<%= c.user.email %>
 			  	</div>
 				<% end %>
 				
