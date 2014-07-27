@@ -1,0 +1,79 @@
+<% @posts.each do |p| %>
+	<div class="row post">
+
+		<!-- photos -->
+		<div class="col-sm-7 col-sm-push-5 photo-column">
+
+			<%= image_tag p.picture.url(:large), class: "img-responsive img-rounded img-profile" %>		
+			<div class="post-details">
+			<%= link_to "Comment", new_post_comment_path(p), class: "btn btn-success", type: "button" %>
+			<%= link_to "Show", p, class: "btn btn-success", type: "button" %>
+			 <br>
+
+				<strong>Tags:</strong>
+			  <%= p.tags %><br>
+			  Posted by <%= link_to p.user.firstName + " " + p.user.lastName, p.user %>
+			  <%= distance_of_time_in_words_to_now(p.created_at) + " ago" %>	
+			</div>
+	  </div>
+	
+		<!-- comments -->
+		<%# if p.comments.count != 0 %>
+			<div class="col-sm-5 col-sm-pull-7 comments-column well">
+			  
+			  <!-- photo-description -->
+			  <div class="first-comment-box">
+					<div class="first-comment"><strong><%= '"' + p.caption + '"'%></strong>
+					</div>
+			  	<div class="user-icon">
+			  		<%= p.user.firstName + " " + p.user.lastName.first %> <%= link_to image_tag(p.user.picture.url(:small), class: "img-circle img-profile", width: 40 ), p.user %>
+		  		</div>
+			  	
+		
+				</div>
+
+				<!-- comments -->
+			  <% p.comments.each do |c| %>
+			  	<div class="comment">
+				  	<%= c.content %> 
+				  	<%= c.user.firstName + " " + c.user.lastName.first %> <%= link_to image_tag(c.user.picture.url(:small), class: "img-circle img-profile", width: 40 ), c.user %>
+			  	</div>
+				<% end %>
+				
+		  </div>
+
+
+	  
+  </div>
+
+<% end %>
+
+
+
+	  
+
+
+<!-- Button trigger modal -->
+<!-- <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+  Leave Comment
+</button> -->
+
+<!-- Modal -->
+
+<div class="row">
+
+		<!-- comments -->
+		<div class="col-sm-12 pagination pagination-lg">
+		  
+	  			<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+	  </div>
+	
+	  
+  </div>
+
+	 
+
+
+
+
+

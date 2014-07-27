@@ -1,0 +1,37 @@
+<h1>Comments</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Content</th>	
+			<th></th>
+			<th></th>
+			<th></th>
+
+		</tr>
+	</thead>
+
+	<tbody>
+		<%comments.each do |comment| %> 
+		<tr>
+			<td><%= comment.content	%> </td>
+			<td> <%= link_to "Show", comment	%>	</td>
+			<td><%= link_to "Edit", edit_content_path(comment) %> </td>
+			<td><%= link_to "Desroy", comment, method: :delete, data: {confirm: "Are you sure?"} %> </td>
+
+		</tr>
+		<% end %> 
+
+
+
+	</tbody>
+
+
+
+
+
+
+
+</table>
+
+<%= link_to "Create comment", new_comment_path %> 
