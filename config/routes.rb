@@ -1,4 +1,5 @@
 Yala::Application.routes.draw do
+  get "users/new"
 get "chats/room"
   get "sessions/new"
   get "sessions/create"
