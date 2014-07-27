@@ -1,4 +1,11 @@
-Rails.application.routes.draw do
+Yala::Application.routes.draw do
+  get "users/new"
+get "chats/room"
+  get "sessions/new"
+  get "sessions/create"
+  get  '/chatroom' => 'chats#room', :as => :chat
+  get  '/login' => 'sessions#new', :as => :login
+  post '/login' => 'sessions#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,4 +60,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  
+  
+  
+  
 end
