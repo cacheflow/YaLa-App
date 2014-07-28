@@ -1,7 +1,6 @@
 require 'will_paginate/array'
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user, only: [:edit, :update, :destroy]
 
   def index
     @user = current_user
@@ -22,13 +21,22 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def edit
-    @user = current_user
-  end
+ def edit 
+ 	@post = Post.find(params[:id])
+ end 
+
 
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
+    	params[:tag_list][:tags].split(",").each do |t|
+    		tag = Tag.where(name: t.chomp).first
+    		if tag # It's already there?
+    			@post.tags << tag # Just associate it
+    		else # Not there yet, so make a new tag and associate
+    			@post.tags.create(name: t.chomp)
+    		end
+    	end
       redirect_to root_path
     else 
       render 'new'
@@ -36,6 +44,10 @@ class PostsController < ApplicationController
   end
 
   def update
+  	@post = Post.find(params[:id])
+  	@post.update(post_params)
+  	redirect_to posts_path(@posts)
+  	flash.notice = "Your post has been updated"
   end
 
 
@@ -52,7 +64,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-	    params.require(:post).permit(:title, :body, :tag_list, :image)
+	    params.require(:post).permit(:title, :body, :image)
 	end
 
 end 

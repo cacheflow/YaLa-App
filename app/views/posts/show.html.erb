@@ -4,17 +4,18 @@
 		<!-- photos -->
 		<div class="col-sm-7 col-sm-push-5 photo-column">
 
-			<%= image_tag @post.picture.url(:large), class: "img-responsive img-rounded" %>		
+
+			<%= image_tag @post.image.url(:original), class: "img-responsive img-rounded" %>		
 			<div class="post-details">
 			<%= link_to "Comment", new_post_comment_path(@post), class: "btn btn-success", type: "button" %>
 			<% if current_user == @post.user %>
         <%= link_to "Delete", @post, method: :delete, class: "btn btn-danger", type: "button", data: { confirm: 'Are you sure?' } %>
       <% end %>
 			 <br>
-				<%= @post.caption %>
+				<%= @post.image %>
 				<strong>Tags:</strong>
 			  <%= @post.tags %><br>
-			  Posted by <%= link_to @post.user.firstName + " " + @post.user.lastName, current_user %>
+			  Posted by <%= link_to @post.title, current_user %>
 			  <%= distance_of_time_in_words_to_now(@post.created_at) + " ago" %>	
 			</div>
 	  </div>
@@ -26,9 +27,9 @@
 			  <!-- photo-description -->
 			  <div class="first-comment">
 
-			  	<%= @post.caption %> 
-			  	<%= @post.user.firstName + " " + @post.user.lastName.first %> <%= link_to image_tag(@post.user.picture.url(:small), class: "img-circle", width: 40 ), @post.user %>
-			  	
+			  	<%= @post.body %> 
+			  	<%= @post.title %> <%= link_to image_tag(@post.image.url(:small), class: "img-circle", width: 40 ), @post.user %>
+			  	<% end %>
 		
 				</div>
 
@@ -36,7 +37,7 @@
 			  <% @post.comments.each do |c| %>
 			  	<div class="comment">
 				  	<%= c.content %> 
-				  	<%= c.user.firstName + " " + c.user.lastName.first %> <%= link_to image_tag(c.user.picture.url(:small), class: "img-circle", width: 40 ), c.user %>
+				  	<%= c.user %> <%= link_to image_tag(c.user.picture.url(:small), class: "img-circle", width: 40 ), c.user %>
 			  	</div>
 			  	
 				<% end %>

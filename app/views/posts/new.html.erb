@@ -2,25 +2,43 @@
   <div class="col-sm-8 col-sm-offset-2">
 
 
-<h1>Add Photo</h1>
+<h1>Add Content</h1>
 <div class="well bs-component">
 <%= form_for @post, html: { multipart: true, class: "custom" } do |f| %>
 
 <form class="form">
   <fieldset>
+
+    <div class="form-group">
+      <label for="inputCaption" class="col-lg-2 control-label">Title</label>
+      <div class="col-lg-10">
+
+        <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+      </div>
+    </div>
+
+
     <div class="form-group">
       <label for="inputPicture" class="col-lg-2 control-label">Picture</label>
       <div class="col-lg-10">
 
-        <%= f.file_field :picture, class: "form-control", placeholder: "Picture" %>
+        <%= f.file_field :image, class: "form-control", placeholder: "Picture" %>
       </div>
     </div>
 
+    
     <div class="form-group">
       <label for="inputCaption" class="col-lg-2 control-label">Body</label>
       <div class="col-lg-10">
         <%= f.text_field :body, class: "form-control", placeholder: "Body" %>
       </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputTags" class="col-lg-2 control-label">Tags</label>
+      <div class="col-lg-10">
+        <%= text_field :tag_list, :tags, class: "form-control", placeholder: "Tags" %>
+      </div> - Provide a comma-separated list of tags
     </div>
 
     <div class="form-group">

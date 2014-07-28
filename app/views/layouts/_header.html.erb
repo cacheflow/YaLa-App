@@ -14,29 +14,12 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            
-          <% if @current_user %>
-            <li><%= link_to "Add Photo", new_post_path %></li>
-            <li><%= link_to "Users", users_path %></li>
-            <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%= current_user.firstName + " " + current_user.lastName %> <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Profile", current_user %></li>
-                <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-                <li class="divider"></li>
-                <li>
-                  <%= link_to "Sign Out", signout_path, method: "delete" %>
-                </li>
-              </ul>
-            </li>
+        
 
-          <% else %>
-            <li><%= link_to "Sign Up", new_user_path %></li>
-            <li><%= link_to "Sign In", signin_path %></li>
-          <% end %>            
-          </ul>
+            <li><%= link_to "New Post", new_post_path%>
+          </li>
+
+         </ul>
           
         </div>
       </div>

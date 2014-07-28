@@ -5,14 +5,16 @@ class Post < ActiveRecord::Base
 
 	belongs_to :user
 
-	has_attached_file :image
-	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"],
-	:styles => {
-      :original => ['1920x1680>', :jpg, :convert_options => "-auto-orient"],
-      :small    => ['100x100#',   :jpg, :convert_options => "-auto-orient"],
-      :medium   => ['250x250',    :jpg, :convert_options => "-auto-orient"],
-      :large    => ['600x600>',   :jpg, :convert_options => "-auto-orient"]
-    }
+	has_attached_file :image, :styles => {
+      :original => '1920x1680>', 
+      :small    => '100x100#>',  
+      :medium   => '250x250>', 
+      :large    => '600x600>' 
+
+  }
+    
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+	
 
 	def tag_list 
 		# sasda
